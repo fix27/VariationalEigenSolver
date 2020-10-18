@@ -79,7 +79,7 @@ def quantum_solve(
     exact_sol = linalg.eigs(
         sparse.csc_matrix(op.matrix()), k=1, which="SR", return_eigenvectors=False
     )[0]
-    print(f"Exact solution: {-np.abs(exact_sol):.4f}")
+    print(f"Exact solution: {np.real(exact_sol):.4f}")
 
     start_val = model(
         cirquit,
@@ -115,7 +115,7 @@ def quantum_solve(
         symbol_names=params_x + params_y + params_z,
         symbol_values=thetas,
         operators=op,
-        repetitions=5000,
+        repetitions=10000,
     )
 
     print(f"VQE solution: {solution.numpy()[0][0]:.4f}")
